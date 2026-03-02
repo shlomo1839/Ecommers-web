@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useCartStore = create((set) => ({
+const useCartStore = create((set, get) => ({
     cart: [],
 
     addToCarts: (product) => set((state) => ({
@@ -12,6 +12,11 @@ const useCartStore = create((set) => ({
     })),
 
     clearCarts: () => set({ cart: [] }),
+
+    getTotalItems: () => get().cart.length,
+
+    getTotalPrice: () => get().cart.reduce((sum, item) => sum + item.price, 0),
+    
 }));
 
 export default useCartStore;
